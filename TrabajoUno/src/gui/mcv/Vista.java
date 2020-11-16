@@ -25,9 +25,15 @@ import javax.swing.border.TitledBorder;
 import componentes.PanelCopyRight;
 import datos.Persona;
 import gui.componentes.PersonaRenderer;
-
+/**
+ * Clase Vista, representa el diseño principal del programa
+ * @author Susana
+ *
+ */
 public class Vista extends JFrame {
-
+	/**
+	 * Atributos de la clase
+	 */
 	private static final long serialVersionUID = 1L;
 	JPanel contentPane;
 	JButton btnNuevoPersona;
@@ -46,7 +52,7 @@ public class Vista extends JFrame {
 
 
 	/**
-	 * Create the frame.
+	 * Construimos el JFrame
 	 */
 	public Vista() {
 		dlmPersona = new DefaultListModel<Persona>();
@@ -57,7 +63,9 @@ public class Vista extends JFrame {
 		listaPersonas.setCellRenderer(new PersonaRenderer());
 	}
 
-
+	/**
+	 * Método que englobla todos los componentes gráficos de la vista
+	 */
 	public void initComponents() {
 		setTitle("Gesti\u00F3n de Atletismo 2020");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Vista.class.getResource("/img/corriendo.png")));

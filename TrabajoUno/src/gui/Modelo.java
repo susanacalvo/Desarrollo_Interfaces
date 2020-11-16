@@ -14,7 +14,11 @@ import java.util.LinkedList;
 import datos.Carrera;
 import datos.Persona;
 import util.Util;
-
+/**
+ * Clase modelo, realiza todas las operaciones de la aplicacion
+ * @author Susana
+ *
+ */
 public class Modelo {
 	private HashSet<Persona> listaPersonas;
 	private LinkedList<Carrera> listaCarreras;
@@ -85,6 +89,7 @@ public class Modelo {
 	
 	/**
 	 * Método para leer los datos de un fichero binario
+	 * @param fichero
 	 */
 	@SuppressWarnings("unchecked")
 	public void cargarDatos(File fichero) {
@@ -113,6 +118,7 @@ public class Modelo {
 	}
 	/**
 	 * Método para guardar los datos en un fichero binario
+	 * @param fichero
 	 */
 	public void guardarDatos(File fichero) {
 		try {
