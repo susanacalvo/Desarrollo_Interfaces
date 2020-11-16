@@ -1,10 +1,13 @@
 package gui.mcv;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
+
+import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -42,7 +45,7 @@ public class Controlador implements ActionListener, ListSelectionListener, KeyLi
 	private void initActionHandlers(ActionListener listener) {
 		vista.btnEliminarPersona.addActionListener(listener);
 		vista.btnNuevoPersona.addActionListener(listener);
-		vista.btnAbrirColores.addActionListener(listener);
+		vista.mntFondo.addActionListener(listener);
 		vista.mntGuardar.addActionListener(listener);
 		vista.mntCargar.addActionListener(listener);
 		vista.mntSalir.addActionListener(listener);
@@ -76,7 +79,7 @@ public class Controlador implements ActionListener, ListSelectionListener, KeyLi
 			/**
 			 * Añade una nueva persona 
 			 */
-			case "Nuevo":
+			case "NuevaPersona":
 			{
 				String dni=vista.txtDni.getText();
 				String nombre = vista.txtNombre.getText();
@@ -93,14 +96,29 @@ public class Controlador implements ActionListener, ListSelectionListener, KeyLi
 			/**
 			 * Elimina una persona	
 			 */
-			case "Eliminar":
+			case "EliminarPersona":
 				Persona persona = vista.listaPersonas.getSelectedValue();
 				modelo.eliminarPersona(persona);
 				
 				break;
-				
-			case "ElegirColor":
-				
+			/**
+			 * Cambia el color de fondo de la aplicación
+			 */
+			case "Fondo":
+					Color colorSeleccionado = JColorChooser.showDialog(null, "Elige un color", Color.BLACK);
+					vista.contentPane.setBackground(colorSeleccionado);
+					vista.panelBotones.setBackground(colorSeleccionado);
+					vista.panelDatos.setBackground(colorSeleccionado);
+					vista.panelLista.setBackground(colorSeleccionado);
+					vista.panelButtom.setBackground(colorSeleccionado);
+					vista.panelAltura.setBackground(colorSeleccionado);
+					vista.panelApellido.setBackground(colorSeleccionado);
+					vista.panelNombre.setBackground(colorSeleccionado);
+					vista.panelDni.setBackground(colorSeleccionado);
+					vista.panelEdad.setBackground(colorSeleccionado);
+					vista.panelCopyRight.setBackground(colorSeleccionado);
+					vista.panelSolo.setBackground(colorSeleccionado);
+					vista.panelInfo.setBackground(colorSeleccionado);
 				break;
 			/**
 			 * Guarda los datos en un fihcero a través de un selector de ficheros llamando al método guardarDatos

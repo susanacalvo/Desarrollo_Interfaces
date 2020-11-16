@@ -45,10 +45,26 @@ public class Vista extends JFrame {
 	JTextField txtAltura;
 	JList<Persona> listaPersonas;
 	DefaultListModel<Persona>dlmPersona;
-	JButton btnAbrirColores;
 	JMenuItem mntGuardar;
 	JMenuItem mntCargar;
 	JMenuItem mntSalir;
+	JMenuItem mntFondo;
+	JPanel panelPersona;
+	JPanel panelBotones;
+	JPanel panelDatos;
+	JPanel panelButtom;
+	JPanel panelLista;
+	PanelCopyRight panelCopyRight;
+	JPanel panelDni;
+	JPanel panelNombre;
+	JPanel panelApellido;
+	JPanel panelEdad;
+	JPanel panelAltura;
+	JPanel panelSolo;
+	JPanel panelInfo;
+	private JPanel panelBotones_1;
+	private JButton btnNuevoPersona_1;
+	private JButton btnEliminarPersona_1;
 
 
 	/**
@@ -88,6 +104,13 @@ public class Vista extends JFrame {
 		
 		mntSalir = new JMenuItem("Salir");
 		mnArchivo.add(mntSalir);
+		
+		JMenu mnEdit = new JMenu("Editar");
+		menuBar.add(mnEdit);
+		
+		mntFondo = new JMenuItem("Cambiar color fondo");
+		mntFondo.setActionCommand("Fondo");
+		mnEdit.add(mntFondo);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -96,36 +119,34 @@ public class Vista extends JFrame {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane);
 		
-		JPanel panelPersona = new JPanel();
+		panelPersona = new JPanel();
 		tabbedPane.addTab("Persona", null, panelPersona, null);
 		panelPersona.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panelBotones = new JPanel();
+		panelBotones = new JPanel();
 		panelBotones.setBorder(new EmptyBorder(5, 0, 20, 0));
 		FlowLayout fl_panelBotones = (FlowLayout) panelBotones.getLayout();
 		fl_panelBotones.setAlignment(FlowLayout.LEADING);
 		panelPersona.add(panelBotones, BorderLayout.NORTH);
 		
 		btnNuevoPersona = new JButton("Nuevo");
+		btnNuevoPersona.setActionCommand("NuevaPersona");
 		btnNuevoPersona.setToolTipText("Nueva Persona");
 		btnNuevoPersona.setFont(new Font("Arial", Font.PLAIN, 12));
 		panelBotones.add(btnNuevoPersona);
 		
 		btnEliminarPersona = new JButton("Eliminar");
+		btnEliminarPersona.setActionCommand("EliminarPersona");
 		btnEliminarPersona.setToolTipText("Eliminar Persona");
 		btnEliminarPersona.setFont(new Font("Arial", Font.PLAIN, 12));
 		panelBotones.add(btnEliminarPersona);
 		
-		btnAbrirColores = new JButton("Elegir Color");
-		btnAbrirColores.setActionCommand("ElegirColor");
-		btnAbrirColores.setFont(new Font("Arial", Font.PLAIN, 12));
-		panelBotones.add(btnAbrirColores);
-		
-		JPanel panelDatos = new JPanel();
+		panelDatos = new JPanel();
+		panelDatos.setBorder(new EmptyBorder(10, 0, 0, 0));
 		panelPersona.add(panelDatos, BorderLayout.WEST);
 		panelDatos.setLayout(new BoxLayout(panelDatos, BoxLayout.Y_AXIS));
 		
-		JPanel panelDni = new JPanel();
+		panelDni = new JPanel();
 		panelDatos.add(panelDni);
 		panelDni.setLayout(new GridLayout(0, 2, 0, 0));
 		panelDni.setBorder(new EmptyBorder(5, 10, 5, 10));
@@ -140,7 +161,7 @@ public class Vista extends JFrame {
 		panelDni.add(txtDni);
 		txtDni.setColumns(10);
 		
-		JPanel panelNombre = new JPanel();
+		panelNombre = new JPanel();
 		panelDatos.add(panelNombre);
 		panelNombre.setLayout(new GridLayout(0, 2, 0, 0));
 		panelNombre.setBorder(new EmptyBorder(5, 10, 5, 10));
@@ -154,7 +175,7 @@ public class Vista extends JFrame {
 		panelNombre.add(txtNombre);
 		txtNombre.setColumns(10);
 		
-		JPanel panelApellido = new JPanel();
+		panelApellido = new JPanel();
 		panelDatos.add(panelApellido);
 		panelApellido.setLayout(new GridLayout(0, 2, 0, 0));
 		panelApellido.setBorder(new EmptyBorder(5, 10, 5, 10));
@@ -168,7 +189,7 @@ public class Vista extends JFrame {
 		panelApellido.add(txtApellido);
 		txtApellido.setColumns(10);
 		
-		JPanel panelEdad = new JPanel();
+		panelEdad = new JPanel();
 		panelDatos.add(panelEdad);
 		panelEdad.setLayout(new GridLayout(0, 2, 0, 0));
 		panelEdad.setBorder(new EmptyBorder(5, 10, 5, 10));
@@ -182,7 +203,7 @@ public class Vista extends JFrame {
 		panelEdad.add(txtEdad);
 		txtEdad.setColumns(10);
 		
-		JPanel panelAltura = new JPanel();
+		panelAltura = new JPanel();
 		panelDatos.add(panelAltura);
 		panelAltura.setLayout(new GridLayout(0, 2, 0, 0));
 		panelAltura.setBorder(new EmptyBorder(5, 10, 5, 10));
@@ -196,28 +217,28 @@ public class Vista extends JFrame {
 		panelAltura.add(txtAltura);
 		txtAltura.setColumns(10);
 		
-		JPanel panel_8 = new JPanel();
-		panelDatos.add(panel_8);
-		GridBagLayout gbl_panel_8 = new GridBagLayout();
-		gbl_panel_8.columnWidths = new int[]{0};
-		gbl_panel_8.rowHeights = new int[]{0};
-		gbl_panel_8.columnWeights = new double[]{Double.MIN_VALUE};
-		gbl_panel_8.rowWeights = new double[]{Double.MIN_VALUE};
-		panel_8.setLayout(gbl_panel_8);
+		panelSolo = new JPanel();
+		panelDatos.add(panelSolo);
+		GridBagLayout gbl_panelSolo = new GridBagLayout();
+		gbl_panelSolo.columnWidths = new int[]{0};
+		gbl_panelSolo.rowHeights = new int[]{0};
+		gbl_panelSolo.columnWeights = new double[]{Double.MIN_VALUE};
+		gbl_panelSolo.rowWeights = new double[]{Double.MIN_VALUE};
+		panelSolo.setLayout(gbl_panelSolo);
 		
-		JPanel panelButtom = new JPanel();
+		panelButtom = new JPanel();
 		panelPersona.add(panelButtom, BorderLayout.SOUTH);
 		panelButtom.setLayout(new BorderLayout(0, 0));
 		
-		PanelCopyRight panelCopyRight = new PanelCopyRight();
+		panelCopyRight = new PanelCopyRight();
 		panelButtom.add(panelCopyRight);
 		panelCopyRight.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JPanel panelLista = new JPanel();
+		panelLista = new JPanel();
 		panelPersona.add(panelLista, BorderLayout.CENTER);
 		panelLista.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panelInfo = new JPanel();
+		panelInfo = new JPanel();
 		panelInfo.setBorder(new TitledBorder(null, "Lista de Personas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panelInfo.setLayout(new BorderLayout(0, 0));
 		panelLista.add(panelInfo, BorderLayout.CENTER);
@@ -235,7 +256,25 @@ public class Vista extends JFrame {
 		
 		JPanel panelCarrera = new JPanel();
 		tabbedPane.addTab("Carrera", null, panelCarrera, null);
-		panelCarrera.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		panelCarrera.setLayout(new BorderLayout(0, 0));
+		
+		panelBotones_1 = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panelBotones_1.getLayout();
+		flowLayout.setAlignment(FlowLayout.LEADING);
+		panelBotones_1.setBorder(new EmptyBorder(5, 0, 20, 0));
+		panelCarrera.add(panelBotones_1, BorderLayout.NORTH);
+		
+		btnNuevoPersona_1 = new JButton("Nuevo");
+		btnNuevoPersona_1.setToolTipText("Nueva Persona");
+		btnNuevoPersona_1.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnNuevoPersona_1.setActionCommand("NuevaCarrera");
+		panelBotones_1.add(btnNuevoPersona_1);
+		
+		btnEliminarPersona_1 = new JButton("Eliminar");
+		btnEliminarPersona_1.setToolTipText("Eliminar Persona");
+		btnEliminarPersona_1.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnEliminarPersona_1.setActionCommand("EliminarCarrera");
+		panelBotones_1.add(btnEliminarPersona_1);
 	}
 
 }
