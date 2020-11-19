@@ -121,7 +121,7 @@ public class Carrera implements Serializable{
 	 */
 	@Override
 	public String toString() {
-		return "Denominacion=" + denominacion + ", metros=" + metros + ", fecha=" + fecha + ", lugar=" + lugar;
+		return  metros + " " + denominacion;
 	}
 	
 	

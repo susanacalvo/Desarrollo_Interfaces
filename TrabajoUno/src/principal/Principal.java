@@ -14,8 +14,5 @@ public class Principal {
 		login.setVisible(true);
 		login.setLocationRelativeTo(null);
 		login.setResizable(false);
-		
-
 	}
-
 }

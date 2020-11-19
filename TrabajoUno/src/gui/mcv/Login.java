@@ -6,6 +6,9 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,12 +19,13 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import gui.Modelo;
+import util.Util;
 /**
  * Clase Login, su funcionalidad es comprobar que el usuario y contraseña sean correctos para poder acceder al sistema de gestión de carreras
  * @author Susana
  *
  */
-public class Login extends JFrame {
+public class Login extends JFrame{
 	/**
 	 * Atributos de la clase Login
 	 */
@@ -129,6 +133,52 @@ public class Login extends JFrame {
 				}
 			}
 			
+		});
+		
+		this.addWindowListener(new WindowListener() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				int opt = Util.mostrarDialogoSiNo("¿Desea cerrar la aplicación");
+				if(opt == Util.ACEPTAR) {
+					dispose();
+				}				
+			}
+			
+			@Override
+			public void windowOpened(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowIconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowDeiconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowDeactivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowActivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
 		});
 	}
 }

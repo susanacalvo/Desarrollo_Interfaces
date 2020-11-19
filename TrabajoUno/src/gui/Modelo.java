@@ -38,9 +38,10 @@ public class Modelo {
 	 * @param apellido
 	 * @param edad
 	 * @param altura
+	 * @param carrera 
 	 */
-	public void altaPersona(String dni, String nombre, String apellido, int edad, double altura) {
-		listaPersonas.add(new Persona(dni,nombre,apellido,edad,altura));
+	public void altaPersona(String dni, String nombre, String apellido, int edad, double altura, Carrera carrera) {
+		listaPersonas.add(new Persona(dni,nombre,apellido,edad,altura,carrera));
 	}
 	/**
 	 * Método para eliminar una persona de la lista

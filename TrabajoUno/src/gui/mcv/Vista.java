@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,8 +24,16 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import componentes.PanelCopyRight;
+import datos.Carrera;
 import datos.Persona;
+import gui.componentes.CarreraRenderer;
 import gui.componentes.PersonaRenderer;
+import com.github.lgooddatepicker.components.DatePicker;
+import javax.swing.JCheckBox;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import java.awt.Dimension;
+import javax.swing.JComboBox;
 /**
  * Clase Vista, representa el diseño principal del programa
  * @author Susana
@@ -60,23 +69,91 @@ public class Vista extends JFrame {
 	JPanel panelApellido;
 	JPanel panelEdad;
 	JPanel panelAltura;
-	JPanel panelSolo;
 	JPanel panelInfo;
-	private JPanel panelBotones_1;
-	private JButton btnNuevoPersona_1;
-	private JButton btnEliminarPersona_1;
+	JPanel panelBotonesCarrera;
+	JButton btnNuevaCarrera;
+	JButton btnEliminarCarrera;
+	JPanel panelRelacion;
+	JPanel panelDatosCarrera;
+	JPanel panelDenominacion;
+	JLabel lblDenominacion;
+	JTextField txtDenominacion;
+	JPanel panelDistancia;
+	JPanel panelLugar;
+	JLabel lblDistancia;
+	JTextField txtDistancia;
+	JLabel lblLugar;
+	JTextField txtLugar;
+	JPanel panelFecha;
+	JPanel panelRealizado;
+	JLabel lblFecha;
+	JLabel lblRealizado;
+	JCheckBox chRealizado;
+	JPanel panelButtomCarrera;
+	PanelCopyRight panelCopyRight_1;
+	DatePicker datePicker;
+	JPanel panelListaCarrera;
+	JPanel panelInfoCarrera;
+	JScrollPane scrollPaneCarrera;
+	JList<Carrera> listaCarreras;
+	DefaultListModel<Carrera> dlmCarrera;
+	JPanel panel_1;
+	JPanel panelCarrera;
+	private JPanel panel_5;
+	private JPanel panel_6;
+	JPanel panelCarreras;
+	JPanel panelPersonas;
+	PanelCopyRight panelCopyRight_2;
+	JPanel panel;
+	private JLabel lblNewLabel;
+	JPanel panel_2;
+	private JLabel lblPersonas;
+	private JPanel panel_3;
+	private JScrollPane scrollPane_1;
+	JList<Carrera> listaContenidoCarrera;
+	DefaultListModel<Carrera>dlmContenidoCarrera;
+	private JPanel panel_4;
+	private JScrollPane scrollPane_2;
+	JList <Persona>listaContenidoPersonas;
+	DefaultListModel<Persona>dlmContenidoPersona;
+	JPanel panelC;
+	private JLabel lblC;
+	JComboBox <Carrera>cbRace;
+	DefaultComboBoxModel<Carrera>dcbmCarrera;
+	JPanel panelSolo;
 
 
 	/**
 	 * Construimos el JFrame
 	 */
 	public Vista() {
-		dlmPersona = new DefaultListModel<Persona>();
-		
+
 		initComponents();
 		
+		initListCombo();
+	
+	}
+	
+	/**
+	 * Método que engloba a las listas y comboBox
+	 */
+	public void initListCombo() {
+		dlmPersona = new DefaultListModel<Persona>();
 		listaPersonas.setModel(dlmPersona);
 		listaPersonas.setCellRenderer(new PersonaRenderer());
+		
+		dlmCarrera = new DefaultListModel<Carrera>();
+		listaCarreras.setModel(dlmCarrera);
+		listaCarreras.setCellRenderer(new CarreraRenderer());
+		
+		dlmContenidoCarrera = new DefaultListModel<Carrera>();
+		listaContenidoCarrera.setModel(dlmContenidoCarrera);
+		
+		dlmContenidoPersona = new DefaultListModel<Persona>();
+		listaContenidoPersonas.setModel(dlmContenidoPersona);
+		
+		dcbmCarrera =  new DefaultComboBoxModel<Carrera>();
+		cbRace.setModel(dcbmCarrera);
 	}
 
 	/**
@@ -217,6 +294,19 @@ public class Vista extends JFrame {
 		panelAltura.add(txtAltura);
 		txtAltura.setColumns(10);
 		
+		panelC = new JPanel();
+		panelC.setBorder(new EmptyBorder(5, 10, 5, 10));
+		panelDatos.add(panelC);
+		panelC.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		lblC = new JLabel("Carrera:");
+		lblC.setFont(new Font("Arial", Font.PLAIN, 12));
+		panelC.add(lblC);
+		
+		cbRace = new JComboBox<Carrera>();
+		cbRace.setFont(new Font("Arial", Font.PLAIN, 12));
+		panelC.add(cbRace);
+		
 		panelSolo = new JPanel();
 		panelDatos.add(panelSolo);
 		GridBagLayout gbl_panelSolo = new GridBagLayout();
@@ -254,27 +344,199 @@ public class Vista extends JFrame {
 		listaPersonas.setFont(new Font("Arial", Font.PLAIN, 12));
 		scrollPane.setViewportView(listaPersonas);
 		
-		JPanel panelCarrera = new JPanel();
+		panelCarrera = new JPanel();
 		tabbedPane.addTab("Carrera", null, panelCarrera, null);
 		panelCarrera.setLayout(new BorderLayout(0, 0));
 		
-		panelBotones_1 = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panelBotones_1.getLayout();
-		flowLayout.setAlignment(FlowLayout.LEADING);
-		panelBotones_1.setBorder(new EmptyBorder(5, 0, 20, 0));
-		panelCarrera.add(panelBotones_1, BorderLayout.NORTH);
+		panelBotonesCarrera = new JPanel();
+		FlowLayout fl_panelBotonesCarrera = (FlowLayout) panelBotonesCarrera.getLayout();
+		fl_panelBotonesCarrera.setAlignment(FlowLayout.LEADING);
+		panelBotonesCarrera.setBorder(new EmptyBorder(5, 0, 20, 0));
+		panelCarrera.add(panelBotonesCarrera, BorderLayout.NORTH);
 		
-		btnNuevoPersona_1 = new JButton("Nuevo");
-		btnNuevoPersona_1.setToolTipText("Nueva Persona");
-		btnNuevoPersona_1.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnNuevoPersona_1.setActionCommand("NuevaCarrera");
-		panelBotones_1.add(btnNuevoPersona_1);
+		btnNuevaCarrera = new JButton("Nuevo");
+		btnNuevaCarrera.setToolTipText("Nueva Persona");
+		btnNuevaCarrera.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnNuevaCarrera.setActionCommand("NuevaCarrera");
+		panelBotonesCarrera.add(btnNuevaCarrera);
 		
-		btnEliminarPersona_1 = new JButton("Eliminar");
-		btnEliminarPersona_1.setToolTipText("Eliminar Persona");
-		btnEliminarPersona_1.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnEliminarPersona_1.setActionCommand("EliminarCarrera");
-		panelBotones_1.add(btnEliminarPersona_1);
+		btnEliminarCarrera = new JButton("Eliminar");
+		btnEliminarCarrera.setToolTipText("Eliminar Persona");
+		btnEliminarCarrera.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnEliminarCarrera.setActionCommand("EliminarCarrera");
+		panelBotonesCarrera.add(btnEliminarCarrera);
+		
+		panelDatosCarrera = new JPanel();
+		panelDatosCarrera.setBorder(new EmptyBorder(0, 0, 0, 5));
+		panelCarrera.add(panelDatosCarrera, BorderLayout.WEST);
+		panelDatosCarrera.setLayout(new BoxLayout(panelDatosCarrera, BoxLayout.Y_AXIS));
+		
+		panelDenominacion = new JPanel();
+		panelDenominacion.setBorder(new EmptyBorder(10, 0, 10, 0));
+		panelDatosCarrera.add(panelDenominacion);
+		panelDenominacion.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		lblDenominacion = new JLabel("Denominaci\u00F3n:");
+		lblDenominacion.setPreferredSize(new Dimension(50, 13));
+		lblDenominacion.setMaximumSize(new Dimension(50, 13));
+		lblDenominacion.setMinimumSize(new Dimension(50, 13));
+		lblDenominacion.setHorizontalAlignment(SwingConstants.LEFT);
+		lblDenominacion.setFont(new Font("Arial", Font.PLAIN, 12));
+		panelDenominacion.add(lblDenominacion);
+		
+		txtDenominacion = new JTextField();
+		txtDenominacion.setHorizontalAlignment(SwingConstants.LEFT);
+		txtDenominacion.setFont(new Font("Arial", Font.PLAIN, 12));
+		panelDenominacion.add(txtDenominacion);
+		txtDenominacion.setColumns(10);
+		
+		panelDistancia = new JPanel();
+		panelDistancia.setBorder(new EmptyBorder(10, 0, 10, 0));
+		panelDatosCarrera.add(panelDistancia);
+		panelDistancia.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		lblDistancia = new JLabel("Metros:");
+		lblDistancia.setHorizontalAlignment(SwingConstants.LEFT);
+		lblDistancia.setFont(new Font("Arial", Font.PLAIN, 12));
+		panelDistancia.add(lblDistancia);
+		
+		txtDistancia = new JTextField();
+		txtDistancia.setFont(new Font("Arial", Font.PLAIN, 12));
+		panelDistancia.add(txtDistancia);
+		txtDistancia.setColumns(10);
+		
+		panelLugar = new JPanel();
+		panelLugar.setBorder(new EmptyBorder(10, 0, 10, 0));
+		panelDatosCarrera.add(panelLugar);
+		panelLugar.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		lblLugar = new JLabel("Lugar:");
+		lblLugar.setFont(new Font("Arial", Font.PLAIN, 12));
+		panelLugar.add(lblLugar);
+		
+		txtLugar = new JTextField();
+		txtLugar.setFont(new Font("Arial", Font.PLAIN, 12));
+		panelLugar.add(txtLugar);
+		txtLugar.setColumns(10);
+		
+		panelFecha = new JPanel();
+		panelFecha.setBorder(new EmptyBorder(10, 0, 10, 0));
+		panelDatosCarrera.add(panelFecha);
+		panelFecha.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		lblFecha = new JLabel("Fecha: ");
+		lblFecha.setFont(new Font("Arial", Font.PLAIN, 12));
+		panelFecha.add(lblFecha);
+		
+		datePicker = new DatePicker();
+		datePicker.getComponentToggleCalendarButton().setIcon(new ImageIcon(Vista.class.getResource("/img/calendario (1).png")));
+		datePicker.getComponentToggleCalendarButton().setText("");
+		panelFecha.add(datePicker);
+		
+		panelRealizado = new JPanel();
+		panelRealizado.setBorder(new EmptyBorder(10, 10, 0, 0));
+		panelDatosCarrera.add(panelRealizado);
+		panelRealizado.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		lblRealizado = new JLabel("\u00BFSe ha realizado la prueba?");
+		lblRealizado.setFont(new Font("Arial", Font.PLAIN, 12));
+		panelRealizado.add(lblRealizado);
+		
+		chRealizado = new JCheckBox("");
+		chRealizado.setHorizontalAlignment(SwingConstants.CENTER);
+		panelRealizado.add(chRealizado);
+		
+		panel_1 = new JPanel();
+		panelDatosCarrera.add(panel_1);
+		GridBagLayout gbl_panel_1 = new GridBagLayout();
+		gbl_panel_1.columnWidths = new int[]{0};
+		gbl_panel_1.rowHeights = new int[]{0};
+		gbl_panel_1.columnWeights = new double[]{Double.MIN_VALUE};
+		gbl_panel_1.rowWeights = new double[]{Double.MIN_VALUE};
+		panel_1.setLayout(gbl_panel_1);
+		
+		panelButtomCarrera = new JPanel();
+		panelCarrera.add(panelButtomCarrera, BorderLayout.SOUTH);
+		panelButtomCarrera.setLayout(new BorderLayout(0, 0));
+		
+		panelCopyRight_1 = new PanelCopyRight();
+		panelButtomCarrera.add(panelCopyRight_1);
+		panelCopyRight_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		panelListaCarrera = new JPanel();
+		panelCarrera.add(panelListaCarrera, BorderLayout.CENTER);
+		panelListaCarrera.setLayout(new BorderLayout(0, 0));
+		
+		panelInfoCarrera = new JPanel();
+		panelInfoCarrera.setBorder(new TitledBorder(null, "Lista de Carreras", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelListaCarrera.add(panelInfoCarrera, BorderLayout.CENTER);
+		panelInfoCarrera.setLayout(new BorderLayout(0, 0));
+		
+		scrollPaneCarrera = new JScrollPane();
+		panelInfoCarrera.add(scrollPaneCarrera, BorderLayout.CENTER);
+		
+		listaCarreras = new JList<Carrera>();
+		scrollPaneCarrera.setViewportView(listaCarreras);
+		
+		panelRelacion = new JPanel();
+		tabbedPane.addTab("Relaci\u00F3n", null, panelRelacion, null);
+		panelRelacion.setLayout(new BorderLayout(0, 0));
+		
+		panel_5 = new JPanel();
+		panelRelacion.add(panel_5);
+		panel_5.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		panelCarreras = new JPanel();
+		panelCarreras.setBorder(new EmptyBorder(10, 20, 10, 10));
+		panel_5.add(panelCarreras);
+		panelCarreras.setLayout(new BorderLayout(0, 0));
+		
+		panel = new JPanel();
+		panelCarreras.add(panel, BorderLayout.NORTH);
+		
+		lblNewLabel = new JLabel("CARRERAS");
+		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+		panel.add(lblNewLabel);
+		
+		panel_3 = new JPanel();
+		panelCarreras.add(panel_3, BorderLayout.CENTER);
+		panel_3.setLayout(new BorderLayout(0, 0));
+		
+		scrollPane_1 = new JScrollPane();
+		panel_3.add(scrollPane_1, BorderLayout.CENTER);
+		
+		listaContenidoCarrera = new JList<Carrera>();
+		scrollPane_1.setViewportView(listaContenidoCarrera);
+		
+		panelPersonas = new JPanel();
+		panelPersonas.setBorder(new EmptyBorder(10, 10, 10, 20));
+		panel_5.add(panelPersonas);
+		panelPersonas.setLayout(new BorderLayout(0, 0));
+		
+		panel_2 = new JPanel();
+		panelPersonas.add(panel_2, BorderLayout.NORTH);
+		
+		lblPersonas = new JLabel("PERSONAS");
+		lblPersonas.setFont(new Font("Arial", Font.PLAIN, 12));
+		panel_2.add(lblPersonas);
+		
+		panel_4 = new JPanel();
+		panelPersonas.add(panel_4, BorderLayout.CENTER);
+		panel_4.setLayout(new BorderLayout(0, 0));
+		
+		scrollPane_2 = new JScrollPane();
+		panel_4.add(scrollPane_2, BorderLayout.CENTER);
+		
+		listaContenidoPersonas = new JList<Persona>();
+		scrollPane_2.setViewportView(listaContenidoPersonas);
+		
+		panel_6 = new JPanel();
+		panelRelacion.add(panel_6, BorderLayout.SOUTH);
+		panel_6.setLayout(new BorderLayout(0, 0));
+		
+		panelCopyRight_2 = new PanelCopyRight();
+		panel_6.add(panelCopyRight_2);
+		panelCopyRight_2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 	}
 
 }

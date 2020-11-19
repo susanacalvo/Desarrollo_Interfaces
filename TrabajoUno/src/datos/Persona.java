@@ -16,6 +16,7 @@ public class Persona implements Serializable{
 	private String apellidos;
 	private int edad;
 	private double altura;
+	private Carrera carrera;
 	
 	/**
 	 * Constructor de la clase Persona
@@ -24,14 +25,16 @@ public class Persona implements Serializable{
 	 * @param apellidos
 	 * @param edad
 	 * @param altura
+	 * @param carrera
 	 */
-	public Persona(String dni, String nombre, String apellidos, int edad, double altura) {
+	public Persona(String dni, String nombre, String apellidos, int edad, double altura, Carrera carrera) {
 		super();
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.edad = edad;
 		this.altura = altura;
+		this.carrera = carrera;
 	}
 	
 	/**
@@ -114,14 +117,21 @@ public class Persona implements Serializable{
 		this.altura = altura;
 	}
 	
+	public Carrera getCarrera() {
+		return carrera;
+	}
+
+	public void setCarrera(Carrera carrera) {
+		this.carrera = carrera;
+	}
+
 	/**
 	 * Método que devuelve una cadena de información de la clase Persona
 	 * @return
 	 */
 	@Override
 	public String toString() {
-		return "Dni=" + dni + ", nombre=" + nombre + ", apellidos=" + apellidos + ", edad=" + edad
-				+ ", altura=" + altura;
+		return  nombre + " " + apellidos + " " + altura;
 	}
 	
 	

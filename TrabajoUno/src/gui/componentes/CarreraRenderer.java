@@ -1,33 +1,34 @@
 package gui.componentes;
 
 import java.awt.Component;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+import java.awt.FlowLayout;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
-import datos.Persona;
-import java.awt.FlowLayout;
+import datos.Carrera;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 /**
- * Clase PersonaRenderer, implementa un ListCellRenderer de tipo Persona para poder personalizar las listas
+ * Clase CarreraRenderer, implementa un ListCellRenderer de tipo Carrera para poder personalizar las listas
  * @author Susana
  *
  */
-public class PersonaRenderer extends JPanel implements ListCellRenderer<Persona>{
+
+public class CarreraRenderer extends JPanel implements ListCellRenderer<Carrera>{
 	/**
 	 * Atributos de la clase
 	 */
 	private static final long serialVersionUID = 1L;
-	JLabel lblNombre;
-	JLabel lblApellido;
-	JLabel lblAltura;
-
+	private JLabel lblDenominacion;
+	private JLabel lblMetros;
+	private JLabel lblLugar;
+	
 	/**
 	 * Construimos el JPanel
 	 */
-	public PersonaRenderer() {
-		FlowLayout flowLayout = (FlowLayout) getLayout();
-		flowLayout.setAlignment(FlowLayout.LEADING);
+	public CarreraRenderer() {
+		
 		initUI();
 	}
 	
@@ -35,20 +36,23 @@ public class PersonaRenderer extends JPanel implements ListCellRenderer<Persona>
 	 * Método de los componentes gráficos del JPanel
 	 */
 	public void initUI() {
+		FlowLayout flowLayout = (FlowLayout) getLayout();
+		flowLayout.setAlignment(FlowLayout.LEADING);
+		
 		JLabel lblIcono = new JLabel("");
 		lblIcono.setIcon(new ImageIcon(PersonaRenderer.class.getResource("/img/circulo-negro .jpg")));
 		add(lblIcono);
 		
-		lblNombre = new JLabel("");
-		add(lblNombre);
+		lblDenominacion = new JLabel("");
+		add(lblDenominacion);
 		
-		lblApellido = new JLabel("");
-		add(lblApellido);
+		lblMetros = new JLabel("");
+		add(lblMetros);
 		
-		lblAltura = new JLabel("");
-		add(lblAltura);
+		lblLugar = new JLabel("");
+		add(lblLugar);
 	}
-
+	
 	/**
 	 * Método implementado de la interfaz ListCellRenderer
 	 * @param arg0
@@ -58,17 +62,17 @@ public class PersonaRenderer extends JPanel implements ListCellRenderer<Persona>
 	 * @param arg4
 	 */
 	@Override
-	public Component getListCellRendererComponent(JList<? extends Persona> arg0, Persona arg1, int arg2, boolean selected,
+	public Component getListCellRendererComponent(JList<? extends Carrera> arg0, Carrera arg1, int arg2, boolean selected,
 			boolean arg4) {
 		if(arg1 !=null) {
-			lblNombre.setText(arg1.getNombre());
-			lblApellido.setText(arg1.getApellidos());
-			lblAltura.setText(String.valueOf((arg1.getAltura() )));
+			lblDenominacion.setText(arg1.getDenominacion());
+			lblMetros.setText(String.valueOf(arg1.getMetros()));
+			lblLugar.setText((arg1.getLugar()));
 		} else{
 			
-			lblNombre.setText("");
-			lblApellido.setText("");
-			lblAltura.setText("");
+			lblDenominacion.setText("");
+			lblMetros.setText("");
+			lblLugar.setText("");
 		}
 		
 		if(selected) {
