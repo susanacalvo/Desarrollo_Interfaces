@@ -50,7 +50,7 @@ public class Login extends JFrame{
 	public void initComponents() {
 		setTitle("Gesti\u00F3n de Atletismo 2020");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/img/corriendo.png")));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 438, 502);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -141,7 +141,7 @@ public class Login extends JFrame{
 				int opt = Util.mostrarDialogoSiNo("¿Desea cerrar la aplicación");
 				if(opt == Util.ACEPTAR) {
 					dispose();
-				}				
+				}
 			}
 			
 			@Override

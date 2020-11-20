@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 import java.time.LocalDate;
 import javax.swing.JColorChooser;
@@ -14,13 +16,14 @@ import javax.swing.event.ListSelectionListener;
 import datos.Carrera;
 import datos.Persona;
 import gui.Modelo;
+import gui.componentes.PanelPersona;
 import util.Util;
 /**
  * Clase Controlador. Esta clase maneja todos los eventos producidos en la vista principal.
  * @author Susana
  *
  */
-public class Controlador implements ActionListener, ListSelectionListener, KeyListener{
+public class Controlador implements ActionListener, ListSelectionListener, KeyListener, WindowListener{
 	private Modelo modelo;
 	private Vista vista;
 	
@@ -36,6 +39,7 @@ public class Controlador implements ActionListener, ListSelectionListener, KeyLi
 		initActionHandlers(this);
 		initListListeners(this);
 		initKeyListeners(this);
+		initWindowListeners(this);
 	}
 	
 	/**
@@ -61,7 +65,6 @@ public class Controlador implements ActionListener, ListSelectionListener, KeyLi
 		vista.listaPersonas.addListSelectionListener(listener);
 		vista.listaCarreras.addListSelectionListener(listener);
 		vista.listaContenidoCarrera.addListSelectionListener(listener);
-		vista.listaContenidoPersonas.addListSelectionListener(listener);
 	}
 	
 	/**
@@ -78,6 +81,9 @@ public class Controlador implements ActionListener, ListSelectionListener, KeyLi
 		vista.txtLugar.addKeyListener(listener);
 	}
 	
+	private void initWindowListeners(WindowListener listener) {
+		vista.addWindowListener(listener);
+	}
 	/**
 	 * Método del Action Listener que reacciona a diferentes pulsaciones
 	 */
@@ -203,20 +209,26 @@ public class Controlador implements ActionListener, ListSelectionListener, KeyLi
 			 * Sale del sistema de gestión de carreras volviendo al login
 			 */
 			case "Salir":
-				int respuesta = Util.mostrarDialogoSiNo("¿Estás seguro de que quieres salir?");
-				if(respuesta==0) {
-					Login login = new Login();
-					login.setVisible(true);
-					login.setLocationRelativeTo(null);
-					login.setResizable(false);
-					vista.dispose();
-				}
+					salirPrincipal();
 				break;
 		}
 		refrescarListaPersona();
 		refrescarListaCarrera();
 		listarCarreraRelacion();
 		
+	}
+	/**
+	 * Método para salir de la aplicación principal y volver al login
+	 */
+	public void salirPrincipal() {
+		int respuesta = Util.mostrarDialogoSiNo("¿Estás seguro de que quieres salir?");
+		if(respuesta==Util.ACEPTAR) {
+			Login login = new Login();
+			login.setVisible(true);
+			login.setLocationRelativeTo(null);
+			login.setResizable(false);
+			vista.dispose();
+		}
 	}
 	
 	/**
@@ -228,19 +240,22 @@ public class Controlador implements ActionListener, ListSelectionListener, KeyLi
 			vista.dlmContenidoCarrera.addElement(carrera);
 		}
 	}
+	
 	/**
 	 * Método para mostrar la relacion entre Personas y Carreras
 	 * @param carrera
 	 */
 	public void mostrarPersonasDeCarreras(Carrera carrera) {
-			
-		vista.dlmContenidoPersona.clear();
+		vista.panelListarContenidoPersonas.removeAll();
+		
 		for(Persona persona : modelo.getPersona()) {
-			if(persona.getCarrera() == carrera) {
-				vista.dlmContenidoPersona.addElement(persona);
+			if(persona.getCarrera()==carrera) {
+				PanelPersona panelPersona = new PanelPersona(persona);
+				vista.panelListarContenidoPersonas.add(panelPersona);
+			
 			}
+		vista.panelListarContenidoPersonas.revalidate();	
 		}
-	
 	}
 	
 	/**
@@ -313,8 +328,9 @@ public class Controlador implements ActionListener, ListSelectionListener, KeyLi
 			else limpiarCampos();
 			
 		}else if(e.getSource()==vista.listaContenidoCarrera) {
-			Carrera ca = vista.listaContenidoCarrera.getSelectedValue();
-			mostrarPersonasDeCarreras(ca);
+			Carrera carrera = vista.listaContenidoCarrera.getSelectedValue();
+			if(carrera!=null) mostrarPersonasDeCarreras(carrera);
+			
 		}
 	}
 	
@@ -388,6 +404,7 @@ public class Controlador implements ActionListener, ListSelectionListener, KeyLi
 	}
 	/**
 	 * Método que reacciona ante la pulsacion de la tecla suprimir para eliminar objetos
+	 * @param e
 	 */
 	@Override
 	public void keyReleased(KeyEvent e) {
@@ -410,9 +427,55 @@ public class Controlador implements ActionListener, ListSelectionListener, KeyLi
 		
 	}
 	
+	/**
+	 * Método para asegurarse de que el usuario quiere salir de la aplicacion
+	 * @param arg0
+	 */
+	@Override
+	public void windowClosing(WindowEvent arg0) {
+		salirPrincipal();
+		
+	}
+	
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		
-	}	
+	}
+
+	@Override
+	public void windowActivated(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowClosed(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowIconified(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowOpened(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -114,13 +114,13 @@ public class Vista extends JFrame {
 	DefaultListModel<Carrera>dlmContenidoCarrera;
 	private JPanel panel_4;
 	private JScrollPane scrollPane_2;
-	JList <Persona>listaContenidoPersonas;
 	DefaultListModel<Persona>dlmContenidoPersona;
 	JPanel panelC;
 	private JLabel lblC;
 	JComboBox <Carrera>cbRace;
 	DefaultComboBoxModel<Carrera>dcbmCarrera;
 	JPanel panelSolo;
+	JPanel panelListarContenidoPersonas;
 
 
 	/**
@@ -150,7 +150,6 @@ public class Vista extends JFrame {
 		listaContenidoCarrera.setModel(dlmContenidoCarrera);
 		
 		dlmContenidoPersona = new DefaultListModel<Persona>();
-		listaContenidoPersonas.setModel(dlmContenidoPersona);
 		
 		dcbmCarrera =  new DefaultComboBoxModel<Carrera>();
 		cbRace.setModel(dcbmCarrera);
@@ -162,7 +161,7 @@ public class Vista extends JFrame {
 	public void initComponents() {
 		setTitle("Gesti\u00F3n de Atletismo 2020");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Vista.class.getResource("/img/corriendo.png")));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 697, 477);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -527,8 +526,9 @@ public class Vista extends JFrame {
 		scrollPane_2 = new JScrollPane();
 		panel_4.add(scrollPane_2, BorderLayout.CENTER);
 		
-		listaContenidoPersonas = new JList<Persona>();
-		scrollPane_2.setViewportView(listaContenidoPersonas);
+		panelListarContenidoPersonas = new JPanel();
+		scrollPane_2.setViewportView(panelListarContenidoPersonas);
+		panelListarContenidoPersonas.setLayout(new BoxLayout(panelListarContenidoPersonas, BoxLayout.Y_AXIS));
 		
 		panel_6 = new JPanel();
 		panelRelacion.add(panel_6, BorderLayout.SOUTH);
