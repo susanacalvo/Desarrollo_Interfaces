@@ -26,4 +26,12 @@ public class Util {
 	public static int mostrarDialogoSiNo(String mensaje) {
 		return JOptionPane.showConfirmDialog(null, mensaje, "Confirmación", JOptionPane.YES_NO_OPTION);
 	}
+	
+	/**
+	 * Método que muestra un cuadro de diálogo de información
+	 * @param mensaje
+	 */
+	public static void mostrarDialogoInformacion(String mensaje) {
+		JOptionPane.showMessageDialog(null,mensaje, "Infromación", JOptionPane.INFORMATION_MESSAGE);
+	}
 }

@@ -81,6 +81,10 @@ public class Controlador implements ActionListener, ListSelectionListener, KeyLi
 		vista.txtLugar.addKeyListener(listener);
 	}
 	
+	/**
+	 * Método que reacciona ante los WindowListeners
+	 * @param listener
+	 */
 	private void initWindowListeners(WindowListener listener) {
 		vista.addWindowListener(listener);
 	}
@@ -215,7 +219,7 @@ public class Controlador implements ActionListener, ListSelectionListener, KeyLi
 		refrescarListaPersona();
 		refrescarListaCarrera();
 		listarCarreraRelacion();
-		
+		limpiarCampos();
 	}
 	/**
 	 * Método para salir de la aplicación principal y volver al login
@@ -255,6 +259,7 @@ public class Controlador implements ActionListener, ListSelectionListener, KeyLi
 			
 			}
 		vista.panelListarContenidoPersonas.revalidate();	
+		vista.panelListarContenidoPersonas.repaint();
 		}
 	}
 	

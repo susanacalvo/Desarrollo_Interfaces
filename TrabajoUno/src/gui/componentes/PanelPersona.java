@@ -10,8 +10,8 @@ import javax.swing.BoxLayout;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.GridBagLayout;
 import javax.swing.ImageIcon;
+import java.awt.Dimension;
 
 /**
  * Clase Panel Persona. Muestra información de ésta
@@ -36,6 +36,7 @@ public class PanelPersona extends JPanel {
 	 * Create the panel.
 	 */
 	public PanelPersona(Persona persona) {
+		setMaximumSize(new Dimension(450, 109));
 	
 		
 		
@@ -112,15 +113,6 @@ public class PanelPersona extends JPanel {
 		lblAlturaPersona = new JLabel("");
 		lblAlturaPersona.setFont(new Font("Arial", Font.PLAIN, 12));
 		panelAlturaPersona.add(lblAlturaPersona);
-		
-		JPanel panel = new JPanel();
-		panelRestoDatos.add(panel);
-		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{0};
-		gbl_panel.rowHeights = new int[]{0};
-		gbl_panel.columnWeights = new double[]{Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{Double.MIN_VALUE};
-		panel.setLayout(gbl_panel);
 		
 		panelNombre.addMouseListener(new MouseAdapter() {
 			@Override

@@ -105,7 +105,7 @@ public class Modelo {
 		}catch(FileNotFoundException e){
 			e.printStackTrace();
 			System.err.println("Error: El fichero no existe. ");
-			Util.mostrarDialogoError("Error,  El fichero no existe ");
+			Util.mostrarDialogoError("El fichero no existe ");
 		}catch (IOException e) {
 			e.printStackTrace();
 			System.err.println("Error: Fallo en la lectura del fichero. ");
@@ -128,14 +128,14 @@ public class Modelo {
 			serializador.writeObject(listaPersonas);
 			serializador.writeObject(listaCarreras);
 			serializador.close();
-			
+			Util.mostrarDialogoInformacion("¡Guardado Correctamente!");
 		}catch (FileNotFoundException e) {
 			e.printStackTrace();
-            System.out.println("Error: El fichero no existe. ");
-            Util.mostrarDialogoError("Error: El fichero no existe.");
+            System.out.println("El fichero no existe. ");
+            Util.mostrarDialogoError("El fichero no existe.");
         }catch (IOException e) {
         	e.printStackTrace();
-            System.out.println("Error: Fallo en la escritura en el fichero. ");
+            System.out.println("Fallo en la escritura en el fichero. ");
             Util.mostrarDialogoError("Error en la escritura del fichero");
         }
 		
